@@ -1,0 +1,2 @@
+// pacote para desenvolvimento para melhoral o auto-complete na IDE, instalar somente para desenvolvimento
+composer require barryvdh/laravel-ide-helper --dev
