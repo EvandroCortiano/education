@@ -167,15 +167,17 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
+        Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
+        Bootstrapper\BootstrapperL5ServiceProvider::class,
 
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        EDU\Providers\AppServiceProvider::class,
+        EDU\Providers\AuthServiceProvider::class,
+        // EDU\Providers\BroadcastServiceProvider::class,
+        EDU\Providers\EventServiceProvider::class,
+        EDU\Providers\RouteServiceProvider::class,
 
     ],
 
@@ -225,7 +227,14 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'FormBuilder' => Kris\LaravelFormBuilder\Facades\FormBuilder::class,
+        'Table' => Bootstrapper\Facades\Table::class,
+        'Button' => Bootstrapper\Facades\Button::class,
+        'Icon' => \Bootstrapper\Facades\Icon::class,
+        'Navbar' => \Bootstrapper\Facades\Navbar::class,
+        'Navigation' => \Bootstrapper\Facades\Navigation::class,
+        'Alert' => \Bootstrapper\Facades\Alert::class,
+        'Badge' => \Bootstrapper\Facades\Badge::class
     ],
 
 ];
