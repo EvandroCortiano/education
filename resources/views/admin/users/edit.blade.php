@@ -3,11 +3,11 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <h3>Novo Usuário</h3>
+            <h3>Editar Usuário</h3>
             {!! 
-            form($form->add('insert','submit',[
+            form($form->add('edit','submit',[
                 'attr' => ['class' => 'btn btn-primary btn-block'],
-                'label' => Icon::create('floppy-disk').'&nbsp;&nbsp;Inserir'
+                'label' => Icon::create('floppy-disk').'&nbsp;&nbsp;Editar'
                 ])) 
             !!}
         </div>

@@ -19,6 +19,12 @@ Route::prefix('admin')->group(function(){
     Auth::routes();
 
     Route::group(['namespace' => 'Admin\\', 'as' => 'admin.', 'middleware' => 'auth'], function(){
+        Route::name('dashboard')->get('/dashboard', function () {
+            return "Estou no dashboard";
+        });
+        Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
+            Route::name('show_details')->get('show_details','UsersController@showDetails');
+        });
         Route::resource('users', 'UsersController');
     });
 });
