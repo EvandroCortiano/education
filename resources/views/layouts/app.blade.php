@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
     <style type="text/css">
         @media print{
             .hidden-print{
@@ -25,13 +25,23 @@
         @php
             $navbar = Navbar::withBrand(config('app.name'), route('admin.dashboard'))->inverse();
             if(Auth::check()){
-                $arrayLinks = [
-                    ['link' => route('admin.users.index'), 'title' => 'Usuário'],
-                ];
+                if (\Gate::allows('admin')) {
+                    $arrayLinks = [
+                        ['link' => route('admin.users.index'), 'title' => 'Usuário'],
+                        ['link' => route('admin.subjects.index'), 'title' => 'Disciplina'],
+                        ['link' => route('admin.class_informations.index'), 'title' => 'Turma'],
+                    ];
+                    $navbar->withContent(Navigation::links($arrayLinks));
+                }
+
                 $arrayLinksRight = [
                     [
                         Auth::user()->name,
                         [
+                            [
+                                'link' => route('admin.users.settings.edit'),
+                                'title' => 'Configurações'
+                            ],
                             [
                                 'link' => route('logout'),
                                     'title' => 'Logout',
@@ -42,8 +52,7 @@
                         ]
                     ]
                 ];
-                $navbar->withContent(Navigation::links($arrayLinks))
-                        ->withContent(Navigation::links($arrayLinksRight)->right());
+                $navbar->withContent(Navigation::links($arrayLinksRight)->right());
 
                 $formLogout = FormBuilder::plain([
                     'id' => 'form-logout',
@@ -70,6 +79,6 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/admin.js') }}"></script>
 </body>
 </html>
