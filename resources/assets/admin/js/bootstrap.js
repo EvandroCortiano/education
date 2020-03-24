@@ -8,4 +8,7 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap-sass');
+    //carrega o Pnotify
+    window.PNotify = require('pnotify');
+    require('pnotify/src/pnotify.buttons');
 } catch (e) {}

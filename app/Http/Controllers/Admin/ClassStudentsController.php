@@ -5,6 +5,8 @@ namespace EDU\Http\Controllers\Admin;
 use EDU\Models\ClassInformation;
 use Illuminate\Http\Request;
 use EDU\Http\Controllers\Controller;
+use EDU\Http\Requests\ClassStudentRequest;
+use EDU\Models\Student;
 
 class ClassStudentsController extends Controller
 {
@@ -28,9 +30,11 @@ class ClassStudentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClassStudentRequest $request, ClassInformation $class_information)
     {
-        //
+        $student = Student::find($request->get('student_id'));
+        $class_information->students()->save($student);
+        return $student;
     }
 
     /**
@@ -39,8 +43,9 @@ class ClassStudentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(ClassInformation $class_information, Student $student)
     {
-        //
+        $class_information->students()->detach([$student->id]);
+        return response()->json([], 204); //status code - no content
     }
 }

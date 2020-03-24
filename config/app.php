@@ -169,6 +169,7 @@ return [
         Laravel\Tinker\TinkerServiceProvider::class,
         Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
         Bootstrapper\BootstrapperL5ServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -234,7 +235,9 @@ return [
         'Navbar' => \Bootstrapper\Facades\Navbar::class,
         'Navigation' => \Bootstrapper\Facades\Navigation::class,
         'Alert' => \Bootstrapper\Facades\Alert::class,
-        'Badge' => \Bootstrapper\Facades\Badge::class
+        'Badge' => \Bootstrapper\Facades\Badge::class,
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class
     ],
 
 ];

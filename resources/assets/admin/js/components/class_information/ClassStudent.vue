@@ -14,7 +14,11 @@
             </thead>
             <tbody>
                 <tr v-for="student in students">
-                    <td>Excluir</td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-danger" @click="destroy(student)">
+                            <span class="glyphicon glyphicon-trash"></span> Excluir
+                        </button>
+                    </td>
                     <td>{{student.user.name}}</td>
                 </tr>
             </tbody>
@@ -26,6 +30,7 @@
     import ADMIN_CONFIG from '../../services/adminConfig';
     import store from '../../store/store';
     import 'select2';
+
     export default {
         props: ['classInformation'],
         computed: {
@@ -55,6 +60,32 @@
                 },
                 minimumInputLength: 2,
             });
+
+            // salva o studande na turma
+            let self = this;
+            $("select[name=students]").on('select2:select', event => {
+                store.dispatch('classStudent/store', {
+                    studentId: event.params.data.id,
+                    classInformationId: self.classInformation
+                }).then(() => {
+                    new PNotify({
+                        title: 'Aviso',
+                        text: 'Aluno adicionado com sucesso',
+                        styling: 'brighttheme',
+                        type: 'success'
+                    });
+                });
+            })
+        },
+        methods: {
+            destroy(student){
+                if(confirm('Deseja remover este aluno')){
+                    store.dispatch('classStudent/destroy', {
+                        studentId: student.id,
+                        classInformationId: this.classInformation
+                    })
+                }
+            }
         }
     }
 </script>
